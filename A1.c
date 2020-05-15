@@ -56,8 +56,7 @@ int main(int argc,char* argv[])
         if (argc>=2 && isInt(argv[1])==1)
         {
             printf("%s%s%s", "You choose to simulate ", argv[1], " days.\n");
-            //run simulation for the specified # of days.
-            //TODO
+            //TODO:run simulation for the specified # of days.
 
             return 0;
         }
@@ -76,7 +75,6 @@ int main(int argc,char* argv[])
             int n = atoi(argv[2]);
             for (int i = 0; i < n; i++)
             {
-
                 printResults(i,simulation());
             }
 
@@ -139,7 +137,7 @@ float * simulation()
                 else
                 {
                     count++;
-                    customers[count] = getCustomer(time);
+                    customers[count-1] = getCustomer(time);
                     customers_inside++;
                     /*
                     printf("\t\t\tCustomer %d stays, cut time: %d, now %d"
@@ -154,10 +152,12 @@ float * simulation()
                                 .arrive_time;
                         customers[current].wait_time = time - customers[current]
                                 .arrive_time;
-                        /*
-                        printf("Time %d:\tCurrent customer: %d starts,waited %d "
-                               "minutes\n",time,current,customers[current].wait_time);
-                        printf("Time %d:\tcurrent'll finish at time %d\n",time,
+                        /*printf("Time %d:\tCurrent customer: %d starts,came "
+                               "in at time %d, waited %d minutes\n",time,current,
+                               customers[current].arrive_time,
+                               customers[current].wait_time);
+                        printf("Time %d:\thair cut time %d, current'll finish at "
+                               "time %d\n",time,customers[current].haircut_time,
                                current_serve+customers[current].haircut_time);
                         */
                     }
@@ -182,9 +182,12 @@ float * simulation()
                     customers[current].wait_time = time - customers[current]
                             .arrive_time;
                     /*
-                    printf("Time %d:\tCurrent customer: %d starts,waited %d "
-                           "minutes\n",time,current,customers[current].wait_time);
-                    printf("Time %d:\tcurrent'll finish at time %d\n",time,
+                    printf("Time %d:\tCurrent customer: %d starts,came "
+                           "in at time %d, waited %d minutes\n",time,current,
+                           customers[current].arrive_time,
+                           customers[current].wait_time);
+                    printf("Time %d:\thair cut time %d, current'll finish at "
+                           "time %d\n",time,customers[current].haircut_time,
                            current_serve+customers[current].haircut_time);
                     */
                 }
@@ -219,7 +222,7 @@ float * simulation()
     result[1] = avg_waiting;
     result[2]= sdv;
     result[3]= not_served;
-    //printf("Total number of customers served: %d\n",current+1);
+    printf("Total number of customers served: %d\n",current+1);
     return result;
 }
 //generates a random customer
